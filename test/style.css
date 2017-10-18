@@ -1,0 +1,26 @@
+.top{ position:absolute;
+	top:0px;
+	width:100%;
+	left:0px;
+	height:60px;
+	background-color:#FFF;
+	border-top:4px solid #F00;
+	
+	
+	}
+	body{background-color:#CCC;}
+	img{ margin-top:8px;}
+.khung{
+	position:absolute;
+	margin-top:100px;
+	width:700px;
+	height:600px;
+	left:400px;
+	background-color:#FFF;
+	}
+.center{
+	width:50%;
+	height:50%;
+	margin:50px auto;
+	background:#FFF;
+}
