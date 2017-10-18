@@ -1,0 +1,31 @@
+
+h1{ text-align:center;
+color:#00F;
+font-family:"Times New Roman", Times, serif;
+font-size:36px;}
+.user{ text-align:center;
+		width:370px;
+		border-style:groove;
+		border-color:#00F;
+		background-color:transparent #90C;
+		position:absolute;
+		top:80px;
+		left:30%;
+	
+	
+	}
+
+.pass{ text-align:center;
+		width:370px;
+		border-style:groove;
+		border-color:#00F;
+		background-color:transparent #90C;
+		position:absolute;
+		top:120px;
+		left:30%}
+.dn{ position:absolute;
+top:150px;
+left:35%}
+.rs{ position:absolute;
+top:170px;
+left:35%}
