@@ -1,0 +1,157 @@
+# Cài đặt Apache2
+Bước 1: Cài đặt apache
+Command:
+sudo apt-get install apache2 -y
+
+
+Bước 2: Bật dịch vụ Apache
+Command:
+systemctl enable apache2
+systemctl start apache2
+
+Bước 3: Kiểm tra dịch vụ apache2
+Command:
+systemctl status apache2
+
+truy cap ip server
+
+# Cài đặt Mariadb server
+
+Bước 1: Cài đặt Mariadb server
+Command:
+sudo apt-get install mariadb-server -y
+
+Bước 2: Bật dịch vụ Mysql Mariadb
+Command:
+systemctl enable mysql
+systemctl start mysql
+Bước 3: Cấu hình bảo mật cho Mariadb
+Command:
+sudo mysql_secure_installation
+Bước 4: Trả lời các câu hỏi
+Set root password? [Y/n] y
+Remove anonymous users? [Y/n] enter
+Remove anonymous users? [Y/n] enter
+Remove anonymous users? [Y/n] enter
+Reload privilege tables now? [Y/n] enter
+Bước 5: Kiểm tra lại mysql
+Command:
+service mysql status
+
+Nếu bạn nhìn thấy cảnh báo sau thì bạn thực hiện như sau:
+warning user entry...
+Để giải quyết bạn thực hiện như sau:
+Command:
+sudo mysql
+MariaDb [(none)]> use mysql;
+MariaDb [(none)]> update user set plugin='' where User='root';
+MariaDb [(none)]> flush privileges;
+MariaDb [(none)]> \q
+
+khoi dong lai server >>> ok.
+
+# Cài đặt PHP7
+ Bước 1: Update
+Command:
+sudo apt-get update -y
+Bước 2: Cài đặt php7
+Command:
+sudo apt-get install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi php7.0 -y
+Bước 3: Kiểm tra php đã được cài đặt hay chưa
+Command:
+php -v
+Kiểm tra trên trình duyệt:
+– Cài đặt package hỗ trợ xem file php
+Command:
+sudo apt-get install libapache2-mod-php -y
+Tạo file info.php trong thư mục /var/www/html/ và copy đoạn code như hình:
+
+Command:
+nano /var/www/html/phpinfo.php
+<?php
+phpinfo();
+?>
+– Restart lại dịch vụ apache
+Command:
+service apache2 restart
+
+– Kiểm tra trên trình duyệt
+ipserver/info.php
+
+# Cài đặt phpMyAdmin
+Bước 1: Cài đặt phpmyadmin
+Command:
+sudo apt-get install phpmyadmin php-mbstring php-gettext -y
+chon apache2 roi nhap password
+Bước 2: Kiểm tra
+Command:
+sudo service apache2 restart
+
+Sau khi restart lại dịch vụ apache bạn đăng nhập trên trình duyệt với địa chỉ sau:
+
+http://ip-address/phpmyadmin/ hoặc http://localhost/phpmyadmin
+
+cài đặt wordpress trên LAMP server ubuntu 16.04
+# Tạo database và User cho wordpress
+Bước 1: Đăng nhập vào MariaDB database
+Command:
+mysql -u root -p
+ Bước 2: Tạo Database và User
+Command:
+CREATE DATABASE wordpress character set utf8 collate utf8_bin; 
+GRANT ALL PRIVILEGES on wordpress.* to 'wpuser'@'localhost' identified by 'hoangbcs'; 
+FLUSH PRIVILEGES; exit
+-- moi 1 lenh ngan cach 1 dau ';'
+Vậy là bạn đã có database và user để dùng cho wordpress:
+Bạn có thể ghi chú lại như sau:
+Database: wordpress
+User: wpuser
+Pass: hoangbcs
+
+# Cài đặt Extension cho php 7
+Bước 1: Cài đặt các extension cho php
+Command:
+sudo apt-get install php7.0-mysql php7.0-curl php7.0-json php7.0-cgi php7.0 libapache2-mod-php7.0 php7.0-mcrypt php7.0-xmlrpc php7.0-gd -y
+# Download wordpress
+Bước 1: Download source code
+
+Ở đâyDownload vào thư mục /tmp
+Command:
+cd /tmp
+curl -O https://wordpress.org/latest.tar.gz
+ Bước 2: Giải nén và copy vào thư mục /var/www/html/wordpress
+Command:
+tar xzvf latest.tar.gz
+ 2.1 Đổi tên mặc định file config và xoá file config mặc định
+Command:
+cp /tmp/wordpress/wp-config-sample.php /tmp/wordpress/wp-config.php && rm wp-config-sample.php
+ 2.2 copy vào thư mực /var/www/html/wordpress
+Command:
+sudo cp -a /tmp/wordpress/. /var/www/html/wordpress/
+# Cấu hình thư mục chứa source wordpress
+Để hạn chế sự dòm ngó của hacker cũng như tăng sự bảo mật cho website chúng ta cần cấu hình báo mật thự mục chứa source code wordpress
+Bước 1: Cấu hình bảo mật thư mục /var/www/html/wordpress/
+
+command:
+sudo chown -R www-data:www-data /var/www/html/wordpress/
+sudo chmod -R 755 /var/www/html/wordpress/
+# Cấu hình file config wp-config.php trong /html/wordpress
+Command:
+sudo nano wp-config.php
+nhap thong so nhu vi du vua tao
+
+define(‘DB_NAME’, ‘wordpress‘);
+define(‘DB_USER’, ‘wpuser‘);
+define(‘DB_PASSWORD’, ‘hoangbcs‘);
+
+restart lại các dịch vụ
+sudo systemctl restart mysql && systemctl restart apache2
+# Hoàn thành việc cài đặt wordpress
+vao ipserver/wordpresss 
+cai dat
+
+
+
+
+
+

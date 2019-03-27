@@ -1,0 +1,65 @@
+WooCommerce plugin sản phẩm
+PageNavi phân trang
+Google XML Sitemaps
+Gtranslate - plugin dịch ngôn ngữ website
+theme đẹp bán hàng simple store
+seo yoat
+Delete Expired Transients xóa cache website
+Floating Social Bar mạng xã hội
+Image Widget
+Transient Cleaner
+Widget Logic
+WordPress SEO
+Contact Form 7 tạo trang liên hệ
+TinyMCE Advanced - soạn thảo
+WP Clean Up
+seo by yoast
+loco translate dịch theme sang tiếng việt
+WPBakery Visual Composer sửa trang tùy chọn
+-------------
+$P$BSHMwo6.r9nkY15t85NR4imMrpXS.30 //pass: md5
+-------
+Cách thêm 1 user vào database bằng mysql
+B1: chèn 1 user vào wp_user
+ID: tên đăng nhập
+Pass: để là md5
+email: 
+B2: copy các cột ở bảng wp_usermeta cho ID mới tạo (ID là số)
+------------
+
+
+
+-------------
+
+để cài đặt trang chủ vào giao diện chọn page
+code trang hiển thị sản phẩm theo ý thích
+Đang giảm giá
+
+[sale_products per_page="8"]
+
+Sản phẩm bán chạy
+
+[best_selling_products per_page="8"]
+
+Sản phẩm mới
+[products orderby="date" per_page="8" order="desc"]
+hiển thị theo danh mục sản phẩm
+[product_category category="noi-that" per_page="12" columns="4" orderby="date" order="desc"]
+sản phẩm mới nhất
+[recent_products per_page="12" columns="4" orderby="date" order="desc"]
+-----------------
+theme chuyển đổi qua lại
+https://srd.wordpress.org/plugins/mdc-theme-switcher/
+https://wordpress.org/plugins/theme-switcher/
+https://codex.wordpress.org/Theme_Switching
+--------------
+tạo màu cho menu
+https://raynoblog.com/wordpress-co-ban/tao-thanh-menu-nhieu-mau-sac-bang-css.html
+
+<a href="liên kết" target="new"><img src="link ảnh"></a>
+<a href="mailto:EMAILADDRESS">
+---------------
+Đầu tiên, hãy truy cập Appearance > Editor > mở file header.php và chèn đoạn code dưới đây vào sau thẻ body:
+<div class="headerbanner"><a href="BANNERLINK" target="_blank"><img src="LINKTOIMAGE" width="200" height="50" /></a></div>
+Nếu muốn căn chỉnh banner thì bạn có thể sử dụng .headerbanner { } vào file style.css.
+data:text/html,%20<html%20contenteditable><Title>Notepad</Title> mở notpad trên website

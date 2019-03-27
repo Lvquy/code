@@ -1,0 +1,126 @@
+scp -r user@ip_server:/home/pictures
+
+
+sudo -u postgres createuser <username>
+
+Setting a password for the postgres user
+
+
+comand:
+sudo -u postgres psql postgres
+\password postgres
+\q
+-----
+sau do sua peer thanh md5 trong file nay
+/etc/postgresql/9.6/main/pg_hba.conf 
+local   all             all              peer
+
+---------------
+cd ~/.pgadmin4
+source bin/activate
+pip uninstall pgadmin4
+deactivate
+
+-----------
+cd /etc/postgresql/9.x/main/
+open file named postgresql.conf
+
+sudo vi postgresql.conf
+add this line to that file
+
+listen_addresses = '*'
+then open file named pg_hba.conf
+
+sudo vi pg_hba.conf
+and add this line to that file
+
+host  all  all 0.0.0.0/0 md5
+It allows access to all databases for all users with an encrypted password
+
+restart your server
+sudo /etc/init.d/postgresql restart
+
+-
+    def _test(self,ngay_bao):
+        self.env.cr.execute('SELECT bo_phan,id FROM bao_com WHERE ngay_bao=%r'%(ngay_bao))
+        for i in self.env.cr.fetchall():
+            print i
+            for j in i:
+                print j
+
+
+
+        # context = self._context
+        #
+        # current_uid = context.get('uid')
+        #
+        # user = self.env['res.users'].browse(current_uid)
+        # print user.name
+---------
+
+To stop-
+
+ docker stop db
+ docker stop odoo
+ sudo service docker stop
+To Start-
+
+ sudo service docker start
+ docker start db
+ docker start -a odoo
+
+==============
+
+
+docker stop $(docker ps -a -q)
+
+odoo10-1
+	docker run -d -e POSTGRES_USER=odoo -e POSTGRES_PASSWORD=odoo -e POSTGRES_DB=postgres --name db10 postgres:9.6
+docker run -v /home/quy/odoo-conf:/etc/odoo -v /home/quy/myaddons:/mnt/extra-addons -p 8069:8069 -p 5433:5432 --name odoo10.0 --link db10:db -t odoo:10.0
+
+
+odoo10-2
+docker run -d -e POSTGRES_USER=odoo12 -e POSTGRES_PASSWORD=odoo12 -e POSTGRES_DB=postgres12 --name db12 postgres:9.6
+docker run -v /home/quy/odoo-conf12:/etc/odoo -v /home/quy/myaddons:/mnt/extra-addons -p 8069:8069 --name odoo12 --link db12:db -t odoo:10.0
+
+iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

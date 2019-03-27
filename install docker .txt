@@ -1,0 +1,65 @@
+******************************** Cài đặt Docker trên ubuntu **************************
+
+- Đầu tiên, thêm khóa GPG cho kho lưu trữ Docker chính thức vào hệ thống:
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- Thêm kho lưu trữ Docker vào các nguồn APT:
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+- Tiếp theo, cập nhật cơ sở dữ liệu gói với các gói Docker từ repo mới được bổ sung:
+sudo apt-get update
+- Hãy chắc chắn rằng bạn sắp cài đặt từ Docker repo thay vì repo Ubuntu 16.04 mặc định:
+apt-cache policy docker-ce
+- Bạn sẽ thấy output tương tự như sau:
+ docker-ce:
+ Installed: (none)
+ Candidate: 17.03.1~ce-0~ubuntu-xenial
+ Version table:
+ 17.03.1~ce-0~ubuntu-xenial 500
+ 500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+ 17.03.0~ce-0~ubuntu-xenial 500
+ 500 https://download.docker.com/linux/ubuntu xenial/stable amd64 Packages
+----------------------
+-	Cuối cùng, cài đặt Docker:
+-	Docker bây giờ sẽ được cài đặt, daemon bắt đầu, và quá trình được kích hoạt để bắt đầu khởi động. Kiểm tra xem nó có đang chạy không:
+sudo systemctl status docker
+-	Nếu bạn muốn tránh gõ sudo bất cứ khi nào bạn chạy lệnh docker, hãy thêm tên người dùng của bạn vào nhóm docker:
+sudo usermod -aG docker USER_UBUNTU
+-	Để áp dụng tư cách thành viên nhóm mới, bạn có thể đăng xuất khỏi máy chủ và đăng nhập lại hoặc bạn có thể nhập như sau:
+su user
+-	Bạn sẽ được nhắc nhập mật khẩu của người dùng để tiếp tục.
+                                 Sau đó, bạn có thể xác nhận rằng người dùng của bạn hiện đã được thêm vào nhóm docker bằng cách gõ:
+id -nG
+
+Sử dụng docker
+docker [option] [command] [arguments]
+Stop/xoa tat ca container
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+--------
+To completely uninstall Docker:
+
+Step 1
+
+dpkg -l | grep -i docker
+
+To identify what installed package you have:
+Step 2
+
+sudo apt-get purge -y docker-engine docker docker.io docker-ce  
+sudo apt-get autoremove -y --purge docker-engine docker docker.io docker-ce  
+The above commands will not remove images, containers, volumes, or user created configuration files on your host. If you wish to delete all images, containers, and volumes run the following commands:
+
+sudo rm -rf /var/lib/docker
+sudo rm /etc/apparmor.d/docker
+sudo groupdel docker
+sudo rm -rf /var/run/docker.sock
+
+
+
+
+
+
+
+
+
+
+

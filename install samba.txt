@@ -1,0 +1,56 @@
+Step1:
+	sudo apt-get update
+	sudo apt-get upgrade
+Step2:
+	sudo apt install samba
+- check samba
+	whereis samba
+Step3:
+	mkdir /home/<username>/sambashare/
+- ý nghĩa tạo thư mục chia sẻ, username thay bằng user muốn tạo
+Step4:
+	sudo nano /etc/samba/smb.conf
+- Lưu ý coppy 1 file conf làm backup khi sai
+Step5:
+- Thêm đoạn code này vào dưới cùng file conf
+
+[samba_scan]
+	comment = Samba for scan
+	path = /home/scan/smb
+	valid users = scan,it,cnc,cnc1,kho
+	read only = no
+	browsable = yes
+- ý nghĩa:
+		
+		Mỗi một thư mục là 1 đoạn code
+		samba_scan là tên thư mục hiển thị
+		path là thư mục cho user
+		valid users là tập những user có quyền vào
+		browsable phải là yes
+Phân quyền:
+	Bộ phận cnc có 2 user là cnc, cnc1
+	tạo user cnc và cnc1 trên ubuntu
+	lệnh:	sudo adduser cnc
+		sudo adduser cnc1
+	thêm user cnc vào group cnc1 và thêm cnc1 vào group cnc
+	Phân quyền cho thư mục chia sẻ là 750(người sở hữu full quyền, nhóm sở hữu chỉ đọc, khác không có quyền gì)
+
+- Lưu ý: tạo thư mục scan thì tại valid users khai báo tất cả các user cho phép vào, và đồng thời phân quyền cho thư mục chia sẻ scan là 777
+
+
+-Tạo passwd cho user samba
+	sudo smbpasswd -a cnc
+
+-- Một số lệnh hay dùng: phải dùng sudo, -R là áp dụng với tất cả file trong folder
+	1: Thay đổi quyền sở hữu: sudo chown -R user file/folder
+	2: Thay đổi nhóm sở hữu: sudo chgrp -R nhóm file/folder
+	3: Thêm user vào nhóm: sudo addgroup user group
+	4: Thêm user ubuntu: sudo adduser username
+	5: tạo folder: mkdir folder
+
+
+	
+		
+
+
+sudo service smbd restart

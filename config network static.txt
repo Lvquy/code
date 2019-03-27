@@ -1,0 +1,29 @@
+Lưu ý phải cấu hình Network Adapter cho Ubuntu Server ảo hoá là Bridged (Auto Detect)
+
+
+
+
+sudo nano /etc/network/interfaces
+
+
+# The primary network interface
+auto eth0
+#iface eth0 inet dhcp  //bo lenh nay di, thay bang lenh duoi de fix IP address
+iface eth0 inet static
+address 192.168.1.8
+netmask 255.255.255.0
+gateway 192.168.1.1
+
+chèn DNS Server vào tập tin cấu hình /etc/resolvconf/resolv.conf.d/head.
+
+sudo nano /etc/resolvconf/resolv.conf.d/head
+nameserver 127.0.0.1  //Dùng sẵn các resolved host được caching
+nameserver 192.168.1.1 //Trỏ vào default gateway ở đây là địa chỉ của modem ADSL
+nameserver 210.245.0.58 //Trỏ vào DNS của FPT
+nameserver 203.162.4.190 //Trỏ vào DNS của VNPT
+nameserver 203.113.131.1
+nameserver 210.245.0.11
+nameserver 8.8.8.8
+nameserver 8.8.4.4
+
+reboot lai server

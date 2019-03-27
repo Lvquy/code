@@ -1,0 +1,106 @@
+
+ir.needaction_mixin
+    def _needaction_domain_get(self):
+        return [('state', '=', '05')]
+
+*************
+					in py: _inherit = 'mail.thread'
+					track_visibility='onchange'
+					
+					xml: sau thẻ sheet
+					<div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+***************
+					current use :
+					nhan_vien = fields.Many2one('res.users',string='Nhân viên', readonly=True, default = lambda self: self.env.user)
+					
+**************
+decoration-bf - shows the line in BOLD
+
+decoration-it - shows the line in ITALICS
+
+decoration-danger - shows the line in LIGHT RED
+
+decoration-info - shows the line in LIGHT BLUE
+
+decoration-muted - shows the line in LIGHT GRAY
+
+decoration-primary - shows the line in LIGHT PURPLE
+
+decoration-success - shows the line in LIGHT GREEN
+
+decoration-warning - shows the line in LIGHT BROWN
+
+<tree decoration-bf="message_unread==True" decoration-muted="state=='cancel'"
+                      decoration-info="state in ('wait','confirmed')" string="Purchase Order">
+					  
+*************
+for note in self.search([]):
+sum="Tổng tiền" widget="monetary"
+
+truy xuất tất cả các trường trong class
+<field name="giam_gia" 
+attrs="{'invisible': ['|',('rating', '=','1'),('chu_phong','=',False)],'readonly':[('state','in','1')]}"/>
+
+*****************
+giá trị mặc định của don_gia = 123 khi tạo mới
+    @api.model
+    def create(self, vals):
+        recode = super(LineYC, self).create(vals)
+        recode.don_gia = 123
+        return recode
+********************
+chuyển field datetime sang date
+import dateutil.parser
+b = "2015-10-28 16:09:59"
+d = dateutil.parser.parse(b).date()
+print d
+will give output as 2015-10-28
+**************************
+domain="[('state','=','1')]" options="{'no_create': True}"
+************
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_caidat,Cài đặt phòng,model_setting_hostel,hostel.group_nhanvien,1,1,1,0
+access_caidat:tùy thích nhưng phải duy nhất
+cài đặt phòng: tùy thích
+model_setting_hostel: model là bắt buộc, setting_hostel: là name của class trong file py, trong ví dụ nó là: _name = 'setting.hostel'
+hostel.group_nhanvien: bắt đầu bằng tên thư mục module chấm group_nhanvien là group được thêm mới ở file group.xml
+*****************
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="Nhan_su_lds.group_ns" model="res.groups">
+        <field name="name">Nhóm mới LDS NS</field>
+    </record>
+</odoo>
+***************
+groups="hostel.group_quanly,base.group_system"
+
+_order = 'FIELD_NAME asc'
+
+or
+
+    _order = 'FIELD_NAME desc'
+*****************
+kiểm tra giá trị của 1 field nếu không thỏa mãn thì đưa ra thông báo
+    def _check_qty(self):
+        min = 0
+        max = 100000000
+        if not min <= self.bank_acc < max: return False
+        return True
+    _constraints = [(_check_qty, 'Số tiền cho phép trong khoảng[0-100 triệu] !', ['bank_acc'])]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
